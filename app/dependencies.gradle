@@ -1,0 +1,30 @@
+ext {
+
+    def RetrofitVersion = '2.3.0'
+    def OkHttpVersion = '3.9.1'
+    def room_version = "2.2.6"
+
+    retrofitPackage='com.squareup.retrofit2'
+    okhttp3Package='com.squareup.okhttp3'
+    roomPackage='androidx.room'
+
+
+    networkDependencies=[
+            retrofit : buildDependents(retrofitPackage, 'retrofit', RetrofitVersion),
+            retrofit_converter_gson : buildDependents(retrofitPackage, 'converter-gson', RetrofitVersion),
+            retrofit_rxjava_adaptor:buildDependents(retrofitPackage,'adapter-rxjava2',RetrofitVersion),
+            okhttp3 : buildDependents(okhttp3Package, 'okhttp', OkHttpVersion),
+            okhttp3_logging_interceptor : buildDependents(okhttp3Package, 'logging-interceptor', OkHttpVersion)
+
+    ]
+    roomDependencies=[
+            room_db_runtime:buildDependents(roomPackage,'room-runtime',room_version)
+    ]
+    roomCompilerDependencies=[
+            room_compiler:buildDependents(roomPackage,'room-compiler',room_version)
+    ]
+
+}
+static String buildDependents(String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
+}
